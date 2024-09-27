@@ -1,6 +1,6 @@
 'use client'
 import { signIn, signOut, useSession } from 'next-auth/react'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Button } from "@/components/ui/button"
 import Image from 'next/image'
 import Link from 'next/link' // Import Link from next for navigation
@@ -8,6 +8,16 @@ import Link from 'next/link' // Import Link from next for navigation
 export function Navbar() {
   const { data: session } = useSession()
   const [dropdownOpen, setDropdownOpen] = useState(false)
+  const [remainingWords, setRemainingWords] = useState(200); // Default for logged-in users
+
+  const MAX_WORDS_LOGGED_IN = 500;
+
+  useEffect(() => {
+    if (session) {
+      const wordUsage = parseInt(localStorage.getItem("wordUsage") || "0", 10);
+      setRemainingWords(MAX_WORDS_LOGGED_IN - wordUsage);
+    }
+  }, [session]);
 
   const toggleDropdown = () => {
     setDropdownOpen((prev) => !prev)
@@ -46,13 +56,14 @@ export function Navbar() {
 
               {/* Dropdown Menu */}
               {dropdownOpen && (
-                <div className="absolute right-0 mt-3 w-30 bg-white rounded-lg shadow-lg ">
+                <div className="absolute right-0 mt-3 w-40 bg-white rounded-lg shadow-lg p-4">
+                  <p className="text-gray-700 mb-2">Remaining words: {remainingWords}</p>
                   <Button
                     onClick={() => {
                       signOut()
                       closeDropdown()
                     }}
-                    className="w-30 bg-blue-950 hover:bg-red-700 text-left px-4 py-2"
+                    className="w-full bg-blue-950 hover:bg-red-700 text-left px-4 py-2"
                   >
                     Logout
                   </Button>

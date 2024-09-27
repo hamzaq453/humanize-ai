@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button"
+import { Button } from "@/components/ui/button";
 
 export function ConvertButton({ isLoading, input, handleConvert }: { isLoading: boolean, input: string, handleConvert: () => void }) {
   return (
@@ -11,5 +11,5 @@ export function ConvertButton({ isLoading, input, handleConvert }: { isLoading: 
           {isLoading ? 'Converting...' : 'Convert'}
         </Button>
       </div>
-  )
+  );
 }
