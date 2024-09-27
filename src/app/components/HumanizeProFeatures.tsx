@@ -10,7 +10,7 @@ const HumanizeProFeatures = () => {
         title: 'Multilingual Mastery',
         description:
           'With support for multiple languages, HumanizePro breaks down linguistic barriers. Perfect for global reach, it ensures your content resonates with audiences no matter their language.',
-        icon: '🌐',
+        icon: '🌐', 
       },
       {
         title: 'Readability Boost',
