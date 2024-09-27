@@ -3,6 +3,7 @@ import { signIn, signOut, useSession } from 'next-auth/react'
 import { useState } from 'react'
 import { Button } from "@/components/ui/button"
 import Image from 'next/image'
+import Link from 'next/link' // Import Link from next for navigation
 
 export function Navbar() {
   const { data: session } = useSession()
@@ -20,7 +21,14 @@ export function Navbar() {
     <nav className="w-full bg-[#161b22] p-4">
       <div className="container mx-auto flex justify-between items-center">
         <h1 className="text-2xl font-bold">Humanize AI Text</h1>
-        <div className="flex items-center space-x-4">
+        <div className="flex items-center space-x-8">
+          {/* Pricing Button */}
+          <Link href="/pricing">
+            <Button className="bg-transparent border  rounded-full hover:bg-gray-800 text-white px-4 py-1 ">
+              Pricing
+            </Button>
+          </Link>
+
           {session ? (
             <div className="relative">
               <div className="flex items-center space-x-4">
